@@ -20,7 +20,9 @@ during installation.
   - `addon.wav`
   - `upgrade.wav`
 
-No Homebrew packages or other runtime dependencies are required.
+The runtime is a single Bash script using the macOS system `plutil` and
+`afplay` commands. Node.js, JavaScript, `jq`, Homebrew, and other runtime
+dependencies are not required.
 
 ## Sound pack
 
@@ -109,4 +111,3 @@ Audio files are not included and are not covered by the MIT License. This is
 an independent fan project and is not affiliated with or endorsed by OpenAI,
 Blizzard Entertainment, or the StarCraft franchise. All product names and
 trademarks belong to their respective owners.
-

@@ -1,18 +1,22 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -euo pipefail
 
-SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 SOUND_DIR="${ADJUTANT_SOUNDS_DIR:-$HOME/.codex/adjutant-sounds}"
+payload="$(cat)"
 
-sound_name="$(
-  /usr/bin/osascript -l JavaScript "$SCRIPT_DIR/select-sound.js" 2>/dev/null ||
-    printf '%s\n' "addon.wav"
+last_message="$(
+  printf '%s' "$payload" |
+    /usr/bin/plutil -extract last_assistant_message raw -o - - 2>/dev/null ||
+    true
 )"
 
-case "$sound_name" in
-  plan.wav|addon.wav|upgrade.wav) ;;
-  *) sound_name="addon.wav" ;;
-esac
+if printf '%s' "$last_message" | /usr/bin/grep -qF '<proposed_plan>'; then
+  sound_name="plan.wav"
+elif ((RANDOM % 2)); then
+  sound_name="addon.wav"
+else
+  sound_name="upgrade.wav"
+fi
 
 sound_path="$SOUND_DIR/$sound_name"
 
@@ -26,4 +30,3 @@ if [ "${ADJUTANT_SOUNDS_DEBUG:-0}" = "1" ]; then
 fi
 
 /usr/bin/afplay "$sound_path" >/dev/null 2>&1 || true
-
