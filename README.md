@@ -52,7 +52,7 @@ cd adjutant-sounds
 
 Restart Codex, open `/hooks`, review the new Stop hook, and trust it.
 
-The installer copies the sounds to:
+The installer copies the sounds and the Bash hook script to:
 
 ```text
 ~/.codex/adjutant-sounds/
@@ -96,6 +96,8 @@ Restart Codex after uninstalling.
 
 - No sound: check that all three WAV files exist in
   `~/.codex/adjutant-sounds/`.
+- Hook failed with code 127: update to version 1.0.2 or newer and rerun the
+  installer.
 - Hook is not running: open `/hooks` and trust or enable it.
 - Two sounds play: remove the old manual Stop hook from
   `~/.codex/hooks.json`.

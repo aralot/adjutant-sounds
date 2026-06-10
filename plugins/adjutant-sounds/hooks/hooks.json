@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./scripts/codex-sound.sh",
+            "command": "/bin/bash \"$HOME/.codex/adjutant-sounds/codex-sound.sh\"",
             "timeout": 10
           }
         ]
@@ -13,4 +13,3 @@
     ]
   }
 }
-

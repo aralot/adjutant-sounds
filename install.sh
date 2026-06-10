@@ -47,8 +47,13 @@ done
 
 mkdir -p "$TARGET_SOUND_DIR"
 for sound in plan.wav addon.wav upgrade.wav; do
-  cp "$SOURCE_SOUND_DIR/$sound" "$TARGET_SOUND_DIR/$sound"
+  if [[ ! "$SOURCE_SOUND_DIR/$sound" -ef "$TARGET_SOUND_DIR/$sound" ]]; then
+    cp "$SOURCE_SOUND_DIR/$sound" "$TARGET_SOUND_DIR/$sound"
+  fi
 done
+install -m 755 \
+  "plugins/adjutant-sounds/scripts/codex-sound.sh" \
+  "$TARGET_SOUND_DIR/codex-sound.sh"
 
 if codex plugin marketplace list --json |
   grep -Eq "\"name\"[[:space:]]*:[[:space:]]*\"${MARKETPLACE_NAME}\""; then
@@ -72,4 +77,3 @@ Adjutant Sounds installed.
 2. Open /hooks.
 3. Review and trust the Adjutant Sounds Stop hook.
 EOF
-
