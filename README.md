@@ -29,7 +29,7 @@ dependencies are not required.
 
 Download the sound pack from Telegram:
 
-**TODO: add the public Telegram post URL before release.**
+https://t.me/zhirkovexe/20
 
 The files linked outside this repository are not part of this project or its
 MIT license. Make sure you have the right to use and distribute any audio you
@@ -38,7 +38,7 @@ download.
 ### По-русски
 
 Скачайте из Telegram-поста три файла: `plan.wav`, `addon.wav` и
-`upgrade.wav`. Ссылка будет добавлена перед публикацией репозитория.
+`upgrade.wav`. Ссылка: https://t.me/zhirkovexe/20
 
 ## Install
 
