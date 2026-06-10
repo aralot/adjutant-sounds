@@ -5,7 +5,8 @@ on macOS.
 
 When a Codex turn stops:
 
-- `plan.wav` plays after a response containing `<proposed_plan>`.
+- `plan.wav` plays after a response containing `<proposed_plan>`, including
+  plans that Codex exposes only through the session transcript.
 - `addon.wav` or `upgrade.wav` is selected randomly for every other response.
 
 The repository does not contain audio files. You provide the three WAV files
@@ -98,6 +99,8 @@ Restart Codex after uninstalling.
   `~/.codex/adjutant-sounds/`.
 - Hook failed with code 127: update to version 1.0.2 or newer and rerun the
   installer.
+- A plan plays a completion sound: update to version 1.0.3 or newer and rerun
+  the installer.
 - Hook is not running: open `/hooks` and trust or enable it.
 - Two sounds play: remove the old manual Stop hook from
   `~/.codex/hooks.json`.
