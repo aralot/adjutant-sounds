@@ -1,0 +1,32 @@
+{
+  "name": "adjutant-sounds",
+  "version": "1.0.0",
+  "description": "Play macOS voice notifications when a Codex turn stops.",
+  "author": {
+    "name": "Sergey Zhirkov",
+    "email": "aralot@mail.ru",
+    "url": "https://github.com/aralot"
+  },
+  "homepage": "https://github.com/aralot/adjutant-sounds",
+  "repository": "https://github.com/aralot/adjutant-sounds",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "hooks",
+    "macos",
+    "notifications",
+    "sounds"
+  ],
+  "interface": {
+    "displayName": "Adjutant Sounds",
+    "shortDescription": "Voice notifications when Codex finishes a turn",
+    "longDescription": "A macOS Stop hook that plays a dedicated planning sound or randomly selects one of two completion sounds.",
+    "developerName": "Sergey Zhirkov",
+    "category": "Productivity",
+    "capabilities": [
+      "Notifications"
+    ],
+    "websiteURL": "https://github.com/aralot/adjutant-sounds"
+  }
+}
+

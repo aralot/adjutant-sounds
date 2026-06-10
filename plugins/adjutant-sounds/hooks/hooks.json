@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/codex-sound.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
+

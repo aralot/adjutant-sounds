@@ -1,0 +1,21 @@
+{
+  "name": "adjutant-sounds",
+  "interface": {
+    "displayName": "Adjutant Sounds"
+  },
+  "plugins": [
+    {
+      "name": "adjutant-sounds",
+      "source": {
+        "source": "local",
+        "path": "./plugins/adjutant-sounds"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
+
