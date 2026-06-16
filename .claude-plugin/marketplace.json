@@ -1,0 +1,31 @@
+{
+  "name": "adjutant-sounds",
+  "description": "Voice notifications for AI coding agents on macOS.",
+  "owner": {
+    "name": "Sergey Zhirkov",
+    "email": "aralot@mail.ru"
+  },
+  "plugins": [
+    {
+      "name": "adjutant-sounds",
+      "source": "./plugins/adjutant-sounds-claude",
+      "description": "Voice notifications when Claude Code finishes a turn.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sergey Zhirkov",
+        "email": "aralot@mail.ru"
+      },
+      "homepage": "https://github.com/aralot/adjutant-sounds",
+      "repository": "https://github.com/aralot/adjutant-sounds",
+      "license": "MIT",
+      "keywords": [
+        "claude-code",
+        "hooks",
+        "macos",
+        "notifications",
+        "sounds"
+      ],
+      "category": "Productivity"
+    }
+  ]
+}
