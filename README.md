@@ -7,7 +7,8 @@ When an agent turn stops:
 
 - `plan.wav` plays after a planning response.
   - Codex detects `<proposed_plan>` in the response or transcript.
-  - Claude Code detects `permission_mode: "plan"` in the Stop hook payload.
+  - Claude Code plays it when a plan is presented for approval (a PreToolUse
+    hook on `ExitPlanMode`), and on Stop when `permission_mode` is `"plan"`.
 - `addon.wav` or `upgrade.wav` is selected randomly for every other response.
 
 The repository does not contain audio files. You provide the three WAV files

@@ -11,8 +11,9 @@ extract_payload_value() {
 }
 
 permission_mode="$(extract_payload_value permission_mode)"
+tool_name="$(extract_payload_value tool_name)"
 
-if [ "$permission_mode" = "plan" ]; then
+if [ "$tool_name" = "ExitPlanMode" ] || [ "$permission_mode" = "plan" ]; then
   sound_name="plan.wav"
 elif ((RANDOM % 2)); then
   sound_name="addon.wav"
