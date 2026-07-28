@@ -103,6 +103,8 @@ fi
 
 if [ "${ADJUTANT_SOUNDS_DEBUG:-0}" = "1" ]; then
   printf '%s\n' "${sound_paths[@]}"
-elif [ "${#sound_paths[@]}" -gt 0 ]; then
-  /usr/bin/afplay "${sound_paths[@]}" >/dev/null 2>&1 || true
+else
+  for sound_path in "${sound_paths[@]}"; do
+    /usr/bin/afplay "$sound_path" >/dev/null 2>&1 || true
+  done
 fi
