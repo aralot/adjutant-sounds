@@ -87,23 +87,22 @@ if [ -f "$CONTEXT_ALERTS_FLAG" ] &&
   printf '{"systemMessage":"WARNING! Context is entering the dumb zone: %s tokens."}\n' "$context_used"
 fi
 
-play_sound() {
+sound_paths=()
+
+add_sound() {
   local sound_path="$SOUND_DIR/$1"
 
-  if [ ! -f "$sound_path" ]; then
-    return
-  fi
-
-  if [ "${ADJUTANT_SOUNDS_DEBUG:-0}" = "1" ]; then
-    printf '%s\n' "$sound_path"
-    return
-  fi
-
-  /usr/bin/afplay "$sound_path" >/dev/null 2>&1 || true
+  [ -f "$sound_path" ] && sound_paths+=("$sound_path")
 }
 
-play_sound "$primary_sound_name"
+add_sound "$primary_sound_name"
 
 if [ "$context_alert" -eq 1 ]; then
-  play_sound "warning.wav"
+  add_sound "warning.wav"
+fi
+
+if [ "${ADJUTANT_SOUNDS_DEBUG:-0}" = "1" ]; then
+  printf '%s\n' "${sound_paths[@]}"
+elif [ "${#sound_paths[@]}" -gt 0 ]; then
+  /usr/bin/afplay "${sound_paths[@]}" >/dev/null 2>&1 || true
 fi
