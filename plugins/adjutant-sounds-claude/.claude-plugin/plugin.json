@@ -1,7 +1,7 @@
 {
   "name": "adjutant-sounds",
   "displayName": "Adjutant Sounds",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Play macOS voice notifications when a Claude Code turn stops.",
   "author": {
     "name": "Sergey Zhirkov",

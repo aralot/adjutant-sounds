@@ -10,7 +10,7 @@
       "name": "adjutant-sounds",
       "source": "./plugins/adjutant-sounds-claude",
       "description": "Voice notifications when Claude Code finishes a turn.",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "author": {
         "name": "Sergey Zhirkov",
         "email": "aralot@mail.ru"

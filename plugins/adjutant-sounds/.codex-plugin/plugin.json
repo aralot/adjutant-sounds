@@ -1,6 +1,6 @@
 {
   "name": "adjutant-sounds",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Play macOS voice notifications when a Codex turn stops.",
   "author": {
     "name": "Sergey Zhirkov",

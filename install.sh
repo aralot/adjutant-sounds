@@ -4,6 +4,7 @@ set -euo pipefail
 readonly MARKETPLACE_SOURCE="aralot/adjutant-sounds"
 readonly MARKETPLACE_NAME="adjutant-sounds"
 readonly PLUGIN_NAME="adjutant-sounds"
+readonly CONTEXT_ALERTS_FLAG=".context-alerts-enabled"
 
 readonly CODEX_TARGET_SOUND_DIR="${HOME}/.codex/adjutant-sounds"
 readonly CODEX_USER_HOOKS_FILE="${HOME}/.codex/hooks.json"
@@ -29,6 +30,19 @@ confirm() {
   esac
 }
 
+confirm_default_yes() {
+  local prompt="$1"
+  local answer
+
+  printf '%s [Y/n] ' "$prompt"
+  read -r answer
+
+  case "$answer" in
+    n|N|no|NO) return 1 ;;
+    *) return 0 ;;
+  esac
+}
+
 copy_sounds() {
   local target_dir="$1"
 
@@ -38,6 +52,15 @@ copy_sounds() {
       cp "$SOURCE_SOUND_DIR/$sound" "$target_dir/$sound"
     fi
   done
+
+  if [[ "$context_alerts_enabled" -eq 1 ]]; then
+    if [[ ! "$SOURCE_SOUND_DIR/warning.wav" -ef "$target_dir/warning.wav" ]]; then
+      cp "$SOURCE_SOUND_DIR/warning.wav" "$target_dir/warning.wav"
+    fi
+    : > "$target_dir/$CONTEXT_ALERTS_FLAG"
+  else
+    rm -f "$target_dir/$CONTEXT_ALERTS_FLAG"
+  fi
 }
 
 codex_has_legacy_sound_hook() {
@@ -142,6 +165,7 @@ codex_selected=0
 claude_selected=0
 codex_skipped=0
 claude_skipped=0
+context_alerts_enabled=0
 
 if command -v codex >/dev/null 2>&1; then
   codex_available=1
@@ -171,6 +195,12 @@ if [[ "$codex_selected" -eq 0 && "$claude_selected" -eq 0 ]]; then
 No agents selected. Nothing was changed.
 EOF
   exit 0
+fi
+
+if confirm_default_yes "Enable alerts when the recommended context limit is exceeded?"; then
+  context_alerts_enabled=1
+  [[ -f "$SOURCE_SOUND_DIR/warning.wav" ]] ||
+    fail "missing required sound for context alerts: $SOURCE_SOUND_DIR/warning.wav"
 fi
 
 if [[ "$codex_selected" -eq 1 ]]; then

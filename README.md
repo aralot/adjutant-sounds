@@ -10,18 +10,23 @@ When an agent turn stops:
   - Claude Code plays it when a plan is presented for approval (a PreToolUse
     hook on `ExitPlanMode`), and on Stop when `permission_mode` is `"plan"`.
 - `addon.wav` or `upgrade.wav` is selected randomly for every other response.
+- When optional recommended-context alerts are enabled and context reaches
+  150,000 tokens, the primary sound plays first and `warning.wav` plays next.
+  The hook also shows: `WARNING! Context is entering the dumb zone: <token-count> tokens.`
 
-The repository does not contain audio files. You provide the three WAV files
-during installation.
+The repository does not contain audio files. You provide three WAV files during
+installation, plus `warning.wav` when enabling context alerts.
 
 ## Requirements
 
 - macOS
 - Codex CLI and/or Claude Code
-- Three files named exactly:
+- Three required files named exactly:
   - `plan.wav`
   - `addon.wav`
   - `upgrade.wav`
+- One file required only when context alerts are enabled:
+  - `warning.wav`
 
 The runtime is Bash plus macOS system commands: `plutil` and `afplay`.
 
@@ -37,13 +42,14 @@ download.
 
 ### По-русски
 
-Скачайте из Telegram-поста три файла: `plan.wav`, `addon.wav` и
-`upgrade.wav`. Ссылка: https://t.me/zhirkovexe/20
+Скачайте из Telegram-поста `plan.wav`, `addon.wav`, `upgrade.wav` и, если
+хотите включить оповещения о длинном контексте, `warning.wav`. Ссылка:
+https://t.me/zhirkovexe/20
 
 ## Install
 
-Clone the repository and pass the directory containing the three WAV files to
-the installer:
+Clone the repository and pass the directory containing the sound files to the
+installer:
 
 ```sh
 git clone https://github.com/aralot/adjutant-sounds.git
@@ -57,7 +63,13 @@ installing each integration:
 ```text
 Install Adjutant Sounds for Codex? [y/N]
 Install Adjutant Sounds for Claude Code? [y/N]
+Enable alerts when the recommended context limit is exceeded? [Y/n]
 ```
+
+Context alerts are enabled by default. When enabled, `warning.wav` is required
+and the installer writes an enablement flag alongside the sounds. Re-running
+the installer and answering `n` disables both the context sound and its text
+warning without deleting an existing `warning.wav`.
 
 After installation, restart the selected agent apps. Review and trust the new
 Stop hook if the agent asks for hook approval.
@@ -127,8 +139,9 @@ Restart the agent after uninstalling.
 
 ## Troubleshooting
 
-- No sound: check that the selected agent has all three WAV files in its sound
-  directory.
+- No sound: check that the selected agent has the three required WAV files in
+  its sound directory. Context alerts also require `warning.wav` and the
+  `.context-alerts-enabled` flag in that directory.
 - Hook failed with code 127 in Codex: update to version 1.0.2 or newer and
   rerun the installer.
 - A Codex plan plays a completion sound: update to version 1.0.3 or newer and
